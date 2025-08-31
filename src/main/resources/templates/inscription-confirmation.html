@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmation d'inscription - TaskFlow Pro</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", "Helvetica", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #312e81 0%,
+          #7c3aed 50%,
+          #ec4899 100%
+        );
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .header {
+        background: linear-gradient(
+          135deg,
+          #0ea5e9 0%,
+          #3b82f6 50%,
+          #8b5cf6 100%
+        );
+        padding: 40px 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .logo {
+        position: relative;
+        z-index: 10;
+      }
+
+      .logo-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(
+          135deg,
+          #06b6d4 0%,
+          #3b82f6 50%,
+          #8b5cf6 100%
+        );
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        transform: rotate(12deg);
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: bold;
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #e0f2fe 50%,
+          #bfdbfe 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 8px;
+      }
+
+      .logo-subtitle {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .content {
+        padding: 40px 30px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .welcome-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .welcome-message {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 30px;
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      .user-info {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 30px 0;
+        backdrop-filter: blur(10px);
+      }
+
+      .user-info h3 {
+        color: #06b6d4;
+        font-size: 18px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+      }
+
+      .user-info h3::before {
+        content: "👤";
+        margin-right: 8px;
+        font-size: 20px;
+      }
+
+      .user-detail {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .user-detail:last-child {
+        border-bottom: none;
+      }
+
+      .user-detail .label {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+      }
+
+      .user-detail .value {
+        color: #ffffff;
+        font-weight: 500;
+      }
+
+      .verification-section {
+        background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 30px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .verification-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.03) 10px,
+          rgba(255, 255, 255, 0.03) 20px
+        );
+        animation: backgroundMove 10s linear infinite;
+      }
+
+      .verification-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .verification-code {
+        font-size: 36px;
+        font-weight: bold;
+        font-family: "Courier New", monospace;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        padding: 16px 24px;
+        margin: 20px 0;
+        letter-spacing: 8px;
+        display: inline-block;
+        position: relative;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+      }
+
+      .verification-info {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        z-index: 10;
+      }
+
+      .cta-section {
+        text-align: center;
+        margin: 30px 0;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 16px 32px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+      }
+
+      .features {
+        margin: 30px 0;
+      }
+
+      .features h3 {
+        color: #06b6d4;
+        font-size: 18px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .feature-item {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .feature-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .feature-icon {
+        font-size: 24px;
+        margin-right: 12px;
+      }
+
+      .feature-text {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-text {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 16px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .copyright {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes logoFloat {
+        0%,
+        100% {
+          transform: rotate(12deg) translateY(0px);
+        }
+        50% {
+          transform: rotate(12deg) translateY(-5px);
+        }
+      }
+
+      @keyframes backgroundMove {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          border-radius: 16px;
+        }
+
+        .header,
+        .content,
+        .footer {
+          padding: 20px;
+        }
+
+        .verification-code {
+          font-size: 28px;
+          letter-spacing: 4px;
+        }
+
+        .feature-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header avec Logo -->
+      <div class="header">
+        <div class="logo">
+          <div class="logo-icon">⚡</div>
+          <div class="logo-text">TaskFlow</div>
+          <div class="logo-subtitle">Pro Edition</div>
+        </div>
+      </div>
+
+      <!-- Contenu Principal -->
+      <div class="content">
+        <!-- Section Code de Vérification -->
+        <div class="verification-section">
+          <h3 class="verification-title">🔐 Code de Vérification</h3>
+          <div class="verification-code" th:text="${verificationCode}">
+            123456
+          </div>
+          <p class="verification-info">
+            Utilisez ce code pour confirmer votre adresse email et activer votre
+            compte.
+            <br /><strong>Ce code expire dans 24 heures.</strong>
+          </p>
+        </div>
+
+        <!-- Bouton d'Action -->
+        <div class="cta-section">
+          <a href="http://localhost:5173/verify" class="cta-button">
+            🚀 Confirmer mon compte
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p class="footer-text">
+          Merci de faire confiance à TaskFlow Pro pour votre productivité
+        </p>
+
+        <div class="social-links">
+          <a href="#" class="social-link">📧</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📱</a>
+        </div>
+
+        <p class="copyright">
+          © 2025 TaskFlow Pro. Tous droits réservés.
+          <br />Cet email a été envoyé à
+          <span th:text="${email}">votre-email@example.com</span>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

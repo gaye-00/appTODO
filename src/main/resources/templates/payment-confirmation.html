@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmation de Paiement - Haut Tech</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .header img {
+        width: 150px;
+      }
+      .content {
+        padding: 20px;
+      }
+      .content h2 {
+        color: #2c3e50;
+      }
+      .content p {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      .table th,
+      .table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      .table th {
+        background-color: #f8f8f8;
+      }
+      .footer {
+        text-align: center;
+        font-size: 14px;
+        color: #7f8c8d;
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          src="http://localhost:8040/api/img/logoHautTech.png"
+          alt="Haut Tech Logo"
+        />
+      </div>
+      <div class="content">
+        <h2>Confirmation de votre paiement</h2>
+        <p>
+          Cher(e) <strong th:text="${firstName} + ' ' + ${lastName}"></strong>,
+        </p>
+        <p>
+          Nous avons bien reçu votre paiement pour la commande
+          <strong th:text="${orderReference}"></strong>.
+        </p>
+        <p>
+          Merci pour votre confiance et vos achats sur
+          <a href="https://hautTech.com" style="color: #3498db">Haut Tech</a> !
+        </p>
+        <p>Voici les détails de votre paiement :</p>
+        <table class="table">
+          <tr>
+            <th>Référence de la commande</th>
+            <td th:text="${orderReference}"></td>
+          </tr>
+          <tr>
+            <th>Montant</th>
+            <td th:text="${amount} + ' FCFA'"></td>
+          </tr>
+          <tr>
+            <th>Méthode de paiement</th>
+            <td th:text="${paymentMethod}"></td>
+          </tr>
+        </table>
+        <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+        <p>Cordialement,<br />L'équipe Haut Tech</p>
+      </div>
+      <div class="footer">
+        <p>&copy; 2024 Haut Tech. Tous droits réservés.</p>
+      </div>
+    </div>
+  </body>
+</html>

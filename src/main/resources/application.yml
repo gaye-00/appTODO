@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: dotoApp
+
+  datasource:
+    # url: jdbc:mariadb://localhost:3306/DOTOAPP?createDatabaseIfNotExist=true&userSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mariadb://localhost:3306/DOTOAPP?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: l2i
+    password: l2i
+    driver-class-name: org.mariadb.jdbc.Driver
+    # url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://localhost:3306/DOTOAPP?createDatabaseIfNotExist=true&userSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}
+    # username: ${SPRING_DATASOURCE_USERNAME:gaye}
+    # password: ${SPRING_DATASOURCE_PASSWORD:gaye}
+    # driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # ddl-auto: create-drop
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    #   ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:create-drop}
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    username: l2iuasz@gmail.com
+    password: bwrhzugjitwoohwt
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+
+server:
+  servlet:
+    context-path: /api
+  port: 8087
+
+# # serveur: http://localhost
+# # port-front: 5173
+# serveur: ${FRONTEND_SITE_URL:http://localhost} # FRONTEND_SITE_URL est une variable d'environment
+# port-front: ${FRONTEND_PORT:5173} # Var environment
+
+frontend:
+  url: ${FRONTEND_URL:http://localhost:3002} # Ce que le Backend dois autoriser
+
+super:
+  admin:
+    password: ${SUPER_ADMIN_PASSWORD:Test#Gaye#1234} # Mot de passe par défaut pour le super admin
+  secondAdmin:
+    password: ${SECOND_ADMIN_PASSWORD:Test#CLUBINFO#1234} # Mot de passe par défaut pour le second admin
